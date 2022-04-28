@@ -1,0 +1,11 @@
+{
+  "name": "doggo-says",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/gubertcalixto/doggo-says.git",
+  "author": "Eduardo Calixto <eduardogubertcalixto@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "prompts": "^2.4.2"
+  }
+}
