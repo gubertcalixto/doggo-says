@@ -3,9 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/gubertcalixto/doggo-says.git",
-  "author": "Eduardo Calixto <eduardogubertcalixto@gmail.com>",
-  "license": "MIT",
+  "author": "Eduardo Calixto",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc -w"
+  },
   "dependencies": {
     "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.29",
+    "typescript": "^4.6.4"
   }
 }
