@@ -1,16 +1,18 @@
 #! /usr/bin/env node
 const { DOGGO_PARTS } = require('./doggo-parts');
+const prompts = require('prompts');
 
 const args = process.argv.slice(2);
 let [message] = args;
-const prompts = require('prompts');
-
 
 (async () => {
     if (!message) {
         message = await getPromptMessage();
     }
     if (message) {
+        if (message.includes('egg') && message.includes('easter')) {
+            message = '🐰🥚 ' + message + ' 🥚🐰';
+        }
         console.log('\n');
         printMessageBox(message);
         printDoggo(message);
@@ -43,7 +45,7 @@ function printMessageBox(message: string) {
 }
 
 function printDoggo(message: string) {
-    const paddingPosition = Math.floor(getMessageBoxWidth(message) / 10 * 9)
+    const paddingPosition = Math.floor(getMessageBoxWidth(message) / 10 * 9);
     const padding = new Array(paddingPosition).join(' ');
     for (const doggoLine of DOGGO_PARTS) {
         console.log(padding + doggoLine);
