@@ -1,12 +1,30 @@
 {
   "name": "doggo-says",
-  "version": "1.0.0",
+  "description": "doggo-says can say anything you want",
+  "version": "1.0.3",
   "main": "index.js",
   "repository": "https://github.com/gubertcalixto/doggo-says.git",
   "author": "Eduardo Calixto",
+  "keywords": [
+    "doggo",
+    "says",
+    "doggo-says",
+    "talking",
+    "ASCII"
+  ],
+  "bin": {
+    "doggosay": "./index.js",
+    "doggosays": "./index.js",
+    "doggo-says": "./index.js"
+  },
   "scripts": {
+    "prebuild": "node ./clear-build.js",
     "build": "tsc",
-    "build:watch": "tsc -w"
+    "build:watch": "tsc -w",
+    "postbuild": "node ./postbuild.js",
+    "build:pack": "npm run build && npm run pack",
+    "pack": "cd dist && npm pack",
+    "start": "node ./dist/index.js"
   },
   "dependencies": {
     "prompts": "^2.4.2"

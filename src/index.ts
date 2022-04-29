@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 const { DOGGO_PARTS } = require('./doggo-parts');
 
 const args = process.argv.slice(2);
@@ -9,9 +10,11 @@ const prompts = require('prompts');
     if (!message) {
         message = await getPromptMessage();
     }
-    console.log('\n');
-    printMessageBox(message);
-    printDoggo(message);
+    if (message) {
+        console.log('\n');
+        printMessageBox(message);
+        printDoggo(message);
+    }
 })();
 
 async function getPromptMessage() {
