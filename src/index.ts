@@ -1,6 +1,8 @@
 #! /usr/bin/env node
-const { DOGGO_PARTS } = require('./doggo-parts');
-const prompts = require('prompts');
+const { printDoggo } = require('./doggo');
+const { isEasterEgg, printEasterEgg } = require('./easter-egg');
+const { printMessageBox } = require('./message-box');
+const { getPromptMessage } = require('./prompts');
 
 const args = process.argv.slice(2);
 let [message] = args;
@@ -10,44 +12,11 @@ let [message] = args;
         message = await getPromptMessage();
     }
     if (message) {
-        if (message.includes('egg') && message.includes('easter')) {
-            message = '🐰🥚 ' + message + ' 🥚🐰';
-        }
-        console.log('\n');
         printMessageBox(message);
-        printDoggo(message);
+        if (isEasterEgg(message)) {
+            printEasterEgg(message);
+        } else {
+            printDoggo(message);
+        }
     }
 })();
-
-async function getPromptMessage() {
-    const result = await prompts({
-        type: 'text',
-        name: 'message',
-        message: 'What doggo should say?'
-    });
-    const { message } = result;
-    return message;
-}
-
-function getMessageBoxWidth(message: string) {
-    return Math.ceil(message.length * 2);
-}
-
-function printMessageBox(message: string) {
-    const boxBorder = new Array(getMessageBoxWidth(message)).join('-');
-    const messageStartPosition = Math.floor(getMessageBoxWidth(message) / 10 * 9);
-    const messageStartTxt = new Array(messageStartPosition).join(' ') + '\\/';
-    const spaceBeforeMessage = new Array(Math.floor((boxBorder.length - message.length) / 2)).join(' ');
-    console.log(boxBorder);
-    console.log('\n' + spaceBeforeMessage + message + '\n');
-    console.log(boxBorder);
-    console.log(messageStartTxt);
-}
-
-function printDoggo(message: string) {
-    const paddingPosition = Math.floor(getMessageBoxWidth(message) / 10 * 9);
-    const padding = new Array(paddingPosition).join(' ');
-    for (const doggoLine of DOGGO_PARTS) {
-        console.log(padding + doggoLine);
-    }
-}
